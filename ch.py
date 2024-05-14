@@ -1,0 +1,1 @@
+print(hash("Youtube22!252"))

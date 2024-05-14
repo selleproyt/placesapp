@@ -1,0 +1,59 @@
+import sqlite3
+from flask import werkzeug
+connection = sqlite3.connect('users.db', check_same_thread=False)
+cursor = connection.cursor()
+cursor.execute(''' CREATE TABLE IF NOT EXISTS Users (
+name TEXT NOT NULL,
+login TEXT NOT NULL,
+password TEXT NOT NULL,
+info TEXT NOT NULL
+)
+''')
+connection.commit()
+
+def takeuser(log,passw):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[1]==log and werkzeug.check_password_hash(passw,user[2]):
+            return True
+    return False
+
+def checkexist(usname):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[1] == usname:
+            return True
+    return False
+
+def createuser(name,log,passw):
+    if checkexist(log)==True:
+        return "Логин занят"
+    else:
+        cursor.execute(
+            'INSERT INTO Users (name, login, password, info) VALUES (?, ?, ?, ?)',
+            (name,log,werkzeug.generate_password_hash(passw),""))
+        connection.commit()
+
+def dopoln(username,dopinfo):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[1] == username:
+            st=user[3]+", "+dopinfo
+            cursor.execute(f'''UPDATE Users
+            SET info = {st}
+            WHERE login = {username};
+            ''')
+            connection.commit()
+

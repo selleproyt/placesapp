@@ -3,7 +3,7 @@ from poisk import place
 from flask import request
 from flask import render_template
 from parser import dimport
-
+from userbase import createuser
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 
@@ -11,14 +11,34 @@ app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 def index():
     return render_template('main.html')
 
+
+
+@app.route("/registration")
+def registration():
+    return render_template('regform.html')
+
+
+
+@app.route("/submitreg", methods=['POST'])
+def submitreg():
+    username = request.form["username"]
+    password = request.form["password"]
+    name = request.form["name"]
+    createuser(name, username, password)
+    return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
+
+
+
 @app.route("/admin")
 def admin():
     return render_template('admin.html')
 
 
-@app.route("/lk")
-def admin():
+
+@app.route("/user")
+def user():
     return render_template('lk.html')
+
 
 
 @app.route("/places/<parameters>")
@@ -42,7 +62,6 @@ def submitrest():
               s+="&"
           else:
               s+=userlist[i]
-
       return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/places/{s}">'
   except:
       return render_template('error.html')

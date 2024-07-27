@@ -1,5 +1,6 @@
 import sqlite3
-from flask import werkzeug
+from flask import session
+import werkzeug
 connection = sqlite3.connect('users.db', check_same_thread=False)
 cursor = connection.cursor()
 cursor.execute(''' CREATE TABLE IF NOT EXISTS Users (
@@ -56,4 +57,8 @@ def dopoln(username,dopinfo):
             WHERE login = {username};
             ''')
             connection.commit()
+def login(username,password):
+    if takeuser(username,password)==True:
+        session['username']=username
+        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/user">'
 

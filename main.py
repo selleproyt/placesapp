@@ -1,11 +1,15 @@
 from flask import Flask
+from flask import redirect
 from poisk import place
-from flask import request
+from flask import request,session,g
 from flask import render_template
 from parser import dimport
-from userbase import createuser
+from userbase import createuser,login
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
+
+
+
 
 @app.route("/")
 def index():
@@ -24,9 +28,30 @@ def submitreg():
     username = request.form["username"]
     password = request.form["password"]
     name = request.form["name"]
-    createuser(name, username, password)
-    return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
+    resultofreg=createuser(name, username, password)
+    if resultofreg=="Логин занят":
+        return f"Логин занят"
+    else:
+        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
 
+
+@app.route("/login")
+def loginmain():
+    return render_template('login.html')
+
+
+
+@app.route("/submitlogin", methods=['POST'])
+def submitlogin():
+    username = request.form["username"]
+    password = request.form["password"]
+
+    if login(username,password)==True:
+        session['usname'] = str(username)
+        session.modified = True
+        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/user">'
+    else:
+        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/registration">'
 
 
 @app.route("/admin")
@@ -37,7 +62,14 @@ def admin():
 
 @app.route("/user")
 def user():
-    return render_template('lk.html')
+    try:
+        username = session.get('usname')
+        if username is not None:
+            return render_template('lk.html')
+        else:
+            return f"Вы не вошли в систему"
+    except:
+        return f"Вы не вошли в систему"
 
 
 

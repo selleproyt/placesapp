@@ -19,7 +19,7 @@ def takeuser(log,passw):
     cursor.execute('SELECT * FROM Users')
     users = cursor.fetchall()
     for user in users:
-        if user[1]==log and werkzeug.check_password_hash(passw,user[2]):
+        if user[1]==log and passw==user[2]:
             return True
     return False
 
@@ -40,7 +40,7 @@ def createuser(name,log,passw):
     else:
         cursor.execute(
             'INSERT INTO Users (name, login, password, info) VALUES (?, ?, ?, ?)',
-            (name,log,werkzeug.generate_password_hash(passw),""))
+            (name,log,passw,""))
         connection.commit()
 
 def dopoln(username,dopinfo):
@@ -59,6 +59,7 @@ def dopoln(username,dopinfo):
             connection.commit()
 def login(username,password):
     if takeuser(username,password)==True:
-        session['username']=username
-        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/user">'
+        return True
+    else:
+        return False
 

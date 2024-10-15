@@ -2,42 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
     <title>Place2Day</title>
 </head>
 <body>
+<section class="headbanner">
+
+</section>
+<img width="300px" src="/static/img/logo.jpg">
+
+<img width="100px" align="right" src="/static/img/lk.jpg">
+<section class="paform">
 <form method="post" action="/submit">
-    <label>Город:</label>
-    <input type="text" name="town">
-    <br>
-
-    <label>Количество мест:</label>
-    <input type="text" name="count">
+    <input placeholder="  Город" class="inputtown" type="text" name="town">
+    <br><br>
+    <input placeholder="  Количество мест от 1 до 20" class="inputtown" type="text" name="count">
     <br>
 
     <br>
-    <label>Что вы предпочтёте:</label>
+    <label class="prioritet">Что вы предпочтёте:</label>
+    <br><br>
+    <div align="center" class="radiobox">
+        <label class="checkboxes" for="21">Веселье, вечеринки</label>
+        <input type="radio"  name="atmosphere" id="21" value="1">
+        <input type="radio" name="atmosphere" id="20" value="0">
+        <label class="checkboxes" for="20">Тихое и спокойное место</label><br>
+    </div>
     <br>
-    <input type="radio" name="atmosphere" id="21" value="1">
-    <label for="21">Веселье, вечеринки</label><br>
-    <input type="radio" name="atmosphere" id="20" value="0">
-    <label for="20">Тихое и спокойное место</label><br>
     <br>
-
-    <label>Что вы предпочтёте:</label>
+    <div class="radiobox">
+        <label for="31">Дорогое</label>
+        <input type="radio" name="price" id="31" value="1">
+        <input type="radio" name="price" id="30" value="0">
+        <label for="30">Недорогое</label><br>
+    </div>
     <br>
-    <input type="radio" name="price" id="31" value="1">
-    <label for="31">Дорогое</label><br>
-    <input type="radio" name="price" id="30" value="0">
-    <label for="30">Недорогое</label><br>
     <br>
-
-    <label>Что вы предпочтёте:  </label>
-    <br>
-    <input type="radio" name="side" id="1" value="1">
-    <label for="1">На природе</label><br>
-    <input type="radio" name="side" id="0" value="0">
-    <label for="0">В помещении</label><br>
-    <input type="submit">
+    <div class="radiobox">
+        <label for="1">На природе</label>
+        <input type="radio" name="side" id="1" value="1">
+        <input type="radio" name="side" id="0" value="0">
+        <label for="0">В помещении</label><br>
+    </div>
+    <input class="sendbutton" type="submit">
 </form>
+</section>
+
 </body>
 </html>

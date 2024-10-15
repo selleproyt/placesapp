@@ -1,0 +1,58 @@
+.paform{
+    background-color: rgba(201,82,235, 0.2); /* Белый с прозрачностью */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.headbanner{
+    color:white;
+    margin-right:20px;
+}
+.sendbutton{
+  background-color: #8c13af;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width:60%;
+  border-radius: 30px;
+}
+.inputtown{
+    background-color: #dc93f2;
+    width: 60%;
+    border-radius: 30px;
+    border-color:#8c13af;
+    height:40px;
+    border: 40;
+}
+.radiobox{
+    background-color: #dc93f2;
+    margin-left:20%;
+    width: 60%;
+    border-radius: 30px;
+    border-color:#8c13af;
+    height:40px;
+    border: 40;
+}
+
+.bord{
+    background-color: white;
+    width: 2px;
+    height:40px;
+}
+
+.inputtown::placeholder{
+    color:#8c13af;
+    font-size:20px;
+}
+.prioritet{
+    font-size:30px;
+    color:#8c13af;
+}
+
+.checkboxes{
+    font-size: 20px;
+}

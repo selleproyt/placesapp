@@ -67,9 +67,9 @@ def user():
         if username is not None:
             return render_template('lk.html')
         else:
-            return f"Вы не вошли в систему"
+            return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
     except:
-        return f"Вы не вошли в систему"
+        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
 
 
 

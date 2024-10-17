@@ -7,46 +7,49 @@
 </head>
 <body>
 <section class="headbanner">
-
+    <img width="300px" src="/static/img/logo.jpg">
+    <a class="linklk" href="http://127.0.0.1:5000/user"> <img class="linklk" width="100px" align="right" src="/static/img/lk.jpg"></a>
 </section>
-<img width="300px" src="/static/img/logo.jpg">
-
-<img width="100px" align="right" src="/static/img/lk.jpg">
 <section class="paform">
-<form method="post" action="/submit">
-    <input placeholder="  Город" class="inputtown" type="text" name="town">
-    <br><br>
-    <input placeholder="  Количество мест от 1 до 20" class="inputtown" type="text" name="count">
-    <br>
+    <form method="post" action="/submit">
+        <input placeholder="  Город" class="inputtown" type="text" name="town">
+        <br><br>
+        <input placeholder="  Количество мест от 1 до 20" class="inputtown" type="text" name="count">
+        <br>
 
-    <br>
-    <label class="prioritet">Что вы предпочтёте:</label>
-    <br><br>
-    <div align="center" class="radiobox">
-        <label class="checkboxes" for="21">Веселье, вечеринки</label>
-        <input type="radio"  name="atmosphere" id="21" value="1">
-        <input type="radio" name="atmosphere" id="20" value="0">
-        <label class="checkboxes" for="20">Тихое и спокойное место</label><br>
-    </div>
-    <br>
-    <br>
-    <div class="radiobox">
-        <label for="31">Дорогое</label>
-        <input type="radio" name="price" id="31" value="1">
-        <input type="radio" name="price" id="30" value="0">
-        <label for="30">Недорогое</label><br>
-    </div>
-    <br>
-    <br>
-    <div class="radiobox">
-        <label for="1">На природе</label>
-        <input type="radio" name="side" id="1" value="1">
-        <input type="radio" name="side" id="0" value="0">
-        <label for="0">В помещении</label><br>
-    </div>
-    <input class="sendbutton" type="submit">
-</form>
+        <br>
+        <label class="prioritet">Что вы предпочтёте:</label>
+        <br>
+        <br>
+
+        <div class="radiobox">
+            <label class="checkboxes" for="21">Веселье, вечеринки </label>
+            <input class="radiosize" type="radio"  name="atmosphere" id="21" value="1">
+            <input class="radiosize" type="radio" name="atmosphere" id="20" value="0">
+            <label class="checkboxes" for="20">Тихое и спокойное место</label><br>
+        </div>
+        <br>
+        <br>
+        <div class="radiobox">
+            <label class="checkboxes" for="31">Дорогое</label>
+            <input class="radiosize" type="radio" name="price" id="31" value="1">
+            <input class="radiosize" type="radio" name="price" id="30" value="0">
+            <label class="checkboxes" for="30">Недорогое</label><br>
+        </div>
+        <br>
+        <br>
+        <div class="radiobox">
+            <label class="checkboxes" for="1">На природе</label>
+            <input class="radiosize" type="radio" name="side" id="1" value="1">
+            <input class="radiosize" type="radio" name="side" id="0" value="0">
+            <label class="checkboxes" for="0">В помещении</label><br>
+        </div>
+        <input class="sendbutton" type="submit">
+    </form>
+    <br><br><br>
 </section>
-
+<div class="bottom">
+    <p class="bottomtext" align="center">©All rights reserved Place2Day 2024</p>
+</div>
 </body>
 </html>

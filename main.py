@@ -78,7 +78,7 @@ def places(parameters):
     #return f"Привет, {parameters}!"
     try:
         parameters=list(map(str,parameters.split("&")))
-        return place(parameters)
+        return render_template("results.html",results=place(parameters)[0],resscore=place(parameters)[1],dlp=len(place(parameters)[0]))
     except:
         return f"Неверный формат"
 

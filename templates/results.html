@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Results</title>
+</head>
+<body>
+    {% for elem in range(dlp):%}
+        <div class="resultbox">
+            <table>
+                <tr>
+                    <td width="40%%"><H1 class="nameplace">{{results[elem][0]}}</H1></td>
+                    <td width="35%"></td>
+                    <td align="right"><h1 align="right" class="textplace">Подходит на: {{100 - resscore[elem]}}%</h1></td>
+                </tr>
+            </table>
+
+            <h3 class="nameplace">г. {{results[elem][2]}}</h3>
+            <br><br>
+            <p class="textplace">{{results[elem][4]}}</p>
+
+        </div>
+    <br><br>
+    {%endfor%}
+</body>
+</html>

@@ -15,9 +15,12 @@ def place(userlist):
                 l2.append((i,cnt))
         l2.sort(key=lambda x: x[1])
         l3=[]
+        l4=[]
+        for i in range(count):
+            l4.append(l2[i][1]*25)
         for i in range(count):
             l3.append(l[l2[i][0]])
-        return(l3)
+        return ((l3,l4))
     except:
         return ['error']
 

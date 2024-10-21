@@ -2,9 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Личный кабинет</title>
 </head>
 <body>
+    <table>
+        <tr>
+            <td width="20%">
+                <img width="300px" src="/static/img/logo.jpg">
+            </td>
+            <td width="60%">
+                <H1 align="center" class="namelk">{{name}}</H1>
+            </td>
+            <td width="20%">
+                <a class="linklk" href="http://192.168.102.100:5000/"> <img class="linklk" width="100px" align="right" src="/static/img/home.jpg"></a>
+            </td>
+        </tr>
+    </table>
 
+
+    <hr size="2px" width="100%" color="#8c13af">
+    <br>
+    <form class="formbutton" method="post" action="/submitfromlk">
+        <select class="selector">
+            <option value="Пермь">Пермь</option>
+            <option value="Екатеринбург">Екатеринбург</option>
+        </select>
+        <br>
+        <input value="Подобрать места по предпочтениям"  align="center" class="sendbutton" type="submit">
+    </form>
+    <br>
+    <hr size="2px" width="100%" color="#8c13af">
+
+    <section class="paform">
+        <label class="prioritet">Оставьте отзыв для анализа нейросетью Ваших предпочтений:</label>
+        <br><br>
+        <form method="post" action="/submitresponse">
+            <input placeholder="  Город" class="inputtown" type="text" name="town">
+            <br><br>
+            <input placeholder="   Название места" class="inputtown" type="text" name="name">
+            <br><br>
+            <input placeholder="   Оценка от 1 до 10" class="inputtown" type="text" name="mark">
+            <br>
+            <input class="sendbutton" type="submit">
+        </form>
+    </section>
+
+    <div class="bottom">
+        <p class="bottomtext" align="center">©All rights reserved Place2Day 2024</p>
+    </div>
 </body>
 </html>

@@ -20,12 +20,13 @@ body{
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
-  width:60%;
+  width:70%;
   border-radius: 30px;
+  font-size:20px;
 }
 .inputtown{
     background-color: #dc93f2;
-    width: 60%;
+    width: 70%;
     border-radius: 30px;
     border-color:#8c13af;
     height:40px;
@@ -33,8 +34,8 @@ body{
 }
 .radiobox{
     background-color: #dc93f2;
-    margin-left:20%;
-    width: 60%;
+    margin-left:15%;
+    width: 70%;
     border-radius: 30px;
     border-color:#8c13af;
     height:40px;
@@ -99,4 +100,18 @@ body{
 .textplace{
     color:white;
     margin-left:40px;
+}
+.namelk{
+    font-size:100px;
+    color:#8c13af;
+}
+hr{
+    color:#8c13af;
+}
+.formbutton{
+    text-align:center;
+}
+.selector{
+    color:#8c13af;
+    font-size:20px;
 }

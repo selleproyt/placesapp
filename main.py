@@ -15,8 +15,6 @@ app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 def index():
     return render_template('main.html')
 
-
-
 @app.route("/registration")
 def registration():
     return render_template('regform.html')
@@ -32,7 +30,7 @@ def submitreg():
     if resultofreg=="Логин занят":
         return f"Логин занят"
     else:
-        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
+        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
 
 
 @app.route("/login")
@@ -49,9 +47,9 @@ def submitlogin():
     if login(username,password)==True:
         session['usname'] = str(username)
         session.modified = True
-        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/user">'
+        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/user">'
     else:
-        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/registration">'
+        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/registration">'
 
 
 @app.route("/admin")
@@ -65,11 +63,11 @@ def user():
     try:
         username = session.get('usname')
         if username is not None:
-            return render_template('lk.html')
+            return render_template('lk.html',name=username)
         else:
-            return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
+            return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
     except:
-        return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/login">'
+        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
 
 
 
@@ -94,7 +92,7 @@ def submitrest():
               s+="&"
           else:
               s+=userlist[i]
-      return f'<meta http-equiv="refresh" content="1; url=http://localhost:5000/places/{s}">'
+      return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/places/{s}">'
   except:
       return render_template('error.html')
 
@@ -110,4 +108,4 @@ def submitadmin():
             return "error"
   except:
       return render_template('error.html')
-app.run()
+app.run(host='192.168.102.100')

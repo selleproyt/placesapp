@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
     <title>Registration</title>
 </head>
 <body>
-<form method="post" action="/submitreg">
-    <label>Ваше имя:</label>
-    <input type="text" name="name">
-    <br>
-    <label>Username</label>
-    <input type="text" name="username">
-    <br>
-    <label>Password</label>
-    <input type="text" name="password">
-
-
-    <input type="submit">
-</form>
+    <section class="paform">
+        <label class="prioritet">Регистрация</label>
+        <br>
+        <form method="post" action="/submitreg">
+            <input placeholder="Ваше имя:" class="inputtown" type="text" name="name">
+            <br><br>
+            <input placeholder="Username" class="inputtown" type="text" name="username">
+            <br><br>
+            <input placeholder="Password" class="inputtown" type="text" name="password">
+            <br><br>
+            <img src="/static/img/demo.png">
+            <br><br>
+            <input placeholder="Captcha" class="inputtown" type="text" name="captcha">
+            <br><br>
+            <input class="sendbutton" type="submit">
+        </form>
+    </section>
 </body>
 </html>

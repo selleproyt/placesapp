@@ -5,9 +5,11 @@ from flask import request,session,g
 from flask import render_template
 from parser import dimport
 from userbase import createuser,login
+from captcha.image import ImageCaptcha
+import random
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
-
+key=0
 
 
 
@@ -17,6 +19,11 @@ def index():
 
 @app.route("/registration")
 def registration():
+    global key
+    image=ImageCaptcha(width=200,height=100)
+    key=random.randint(1000,10000)
+    data=image.generate(str(key))
+    image.write(str(key),'static/img/demo.png')
     return render_template('regform.html')
 
 
@@ -26,11 +33,16 @@ def submitreg():
     username = request.form["username"]
     password = request.form["password"]
     name = request.form["name"]
-    resultofreg=createuser(name, username, password)
-    if resultofreg=="Логин занят":
-        return f"Логин занят"
+    captcha=request.form["captcha"]
+    if captcha==str(key):
+        resultofreg=createuser(name, username, password)
+        if resultofreg=="Логин занят":
+            return f"Логин занят"
+        else:
+            return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
     else:
-        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
+        return f"Неверная капча, попробуйте еще раз"
+
 
 
 @app.route("/login")

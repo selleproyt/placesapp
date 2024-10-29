@@ -51,11 +51,11 @@ def dopoln(username,dopinfo):
     users = cursor.fetchall()
     for user in users:
         if user[1] == username:
-            st=user[3]+", "+dopinfo
+            st=user[3]+dopinfo
             cursor.execute(f'''UPDATE Users
-            SET info = {st}
-            WHERE login = {username};
-            ''')
+            SET info = ?
+            WHERE login = ?;
+            ''',(st,username))
             connection.commit()
 def login(username,password):
     if takeuser(username,password)==True:

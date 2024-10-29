@@ -1,2 +1,2 @@
-import os
-print(os.urandom(20).hex())
+from userbase import createuser,login,dopoln
+dopoln('sokolov','Сочи9^')

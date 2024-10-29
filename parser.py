@@ -49,6 +49,13 @@ def dread():
     return userlist
 
 
+def checkplace(town,name):
+    placeslist=dread()
+    fl=0
+    for i in range(len(placeslist)):
+        if placeslist[i][0]==name and placeslist[i][2]==town:
+            fl=1
+    return fl
 def dimport(l):
     name=l[0]
     type=l[1]

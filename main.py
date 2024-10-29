@@ -3,14 +3,14 @@ from flask import redirect
 from poisk import place
 from flask import request,session,g
 from flask import render_template
-from parser import dimport
-from userbase import createuser,login
+from parser import dimport,checkplace
+from userbase import createuser,login,dopoln
 from captcha.image import ImageCaptcha
 import random
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 key=0
-
+url="http://192.168.110.100:5000"
 
 
 @app.route("/")
@@ -26,7 +26,23 @@ def registration():
     image.write(str(key),'static/img/demo.png')
     return render_template('regform.html')
 
-
+@app.route("/submitresponse",methods=['POST'])
+def submitresponse():
+    try:
+        town=request.form["town"]
+        mark=request.form["mark"]
+        name=request.form["name"]
+        if int(mark)<10 and int(mark)>0:
+            if checkplace(town,name)==1:
+                dopinfo=str(name)+str(mark)+"0"
+                dopoln(session['usname'],dopinfo)
+                return f'<meta http-equiv="refresh" content="1; url={url}/user">'
+            else:
+                return render_template('error.html',error="Заведения не существует")
+        else:
+            return render_template('error.html',error="Неверный формат оценки")
+    except:
+        return render_template('error.html', error="Неверный формат")
 
 @app.route("/submitreg", methods=['POST'])
 def submitreg():
@@ -37,11 +53,11 @@ def submitreg():
     if captcha==str(key):
         resultofreg=createuser(name, username, password)
         if resultofreg=="Логин занят":
-            return f"Логин занят"
+            return render_template('error.html',error="Логин занят")
         else:
-            return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
+            return f'<meta http-equiv="refresh" content="1; url={url}/login">'
     else:
-        return f"Неверная капча, попробуйте еще раз"
+        return render_template('error.html',error="Неверная капча, попробуйте еще раз")
 
 
 
@@ -59,9 +75,9 @@ def submitlogin():
     if login(username,password)==True:
         session['usname'] = str(username)
         session.modified = True
-        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/user">'
+        return f'<meta http-equiv="refresh" content="1; url={url}/user">'
     else:
-        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/registration">'
+        return f'<meta http-equiv="refresh" content="1; url={url}/registration">'
 
 
 @app.route("/admin")
@@ -77,9 +93,9 @@ def user():
         if username is not None:
             return render_template('lk.html',name=username)
         else:
-            return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
+            return f'<meta http-equiv="refresh" content="1; url={url}/login">'
     except:
-        return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/login">'
+        return f'<meta http-equiv="refresh" content="1; url={url}/login">'
 
 
 
@@ -90,7 +106,7 @@ def places(parameters):
         parameters=list(map(str,parameters.split("&")))
         return render_template("results.html",results=place(parameters)[0],resscore=place(parameters)[1],dlp=len(place(parameters)[0]))
     except:
-        return f"Неверный формат"
+        return render_template('error.html',error="Неверный формат")
 
 
 @app.route('/submit', methods=['POST'])
@@ -104,9 +120,9 @@ def submitrest():
               s+="&"
           else:
               s+=userlist[i]
-      return f'<meta http-equiv="refresh" content="1; url=http://192.168.102.100:5000/places/{s}">'
+      return f'<meta http-equiv="refresh" content="1; url={url}/places/{s}">'
   except:
-      return render_template('error.html')
+      return render_template('error.html',error="Неверные параметры")
 
 @app.route('/submitadmin', methods=['POST'])
 def submitadmin():
@@ -120,4 +136,4 @@ def submitadmin():
             return "error"
   except:
       return render_template('error.html')
-app.run(host='192.168.102.100')
+app.run(host='192.168.110.100')

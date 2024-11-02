@@ -10,7 +10,7 @@ import random
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 key=0
-url="http://192.168.110.100:5000"
+url="http://192.168.1.33:5000"
 
 
 @app.route("/")
@@ -136,4 +136,4 @@ def submitadmin():
             return "error"
   except:
       return render_template('error.html')
-app.run(host='192.168.110.100')
+app.run(host='192.168.1.33')

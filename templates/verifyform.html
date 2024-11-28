@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Верификация</title>
+</head>
+<body>
+    <section class="paform">
+        <label class="prioritet">Верификация</label>
+
+        <br>
+        <h2>Ваш код: {{code}}</h2>
+        <a href="t.me/anonim_message2_bot"><h2>Подтвердите аккаунт через тг бота</h2></a>
+        <form method="post" action="/submitreg">
+            <input placeholder="Ваш код:" class="inputtown" type="text" name="vscode">
+            <br><br>
+            <input placeholder="Код из бота" class="inputtown" type="text" name="verifcode">
+            <br><br>
+            <input class="sendbutton" type="submit">
+        </form>
+    </section>
+</body>
+</html>

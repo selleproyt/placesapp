@@ -7,15 +7,21 @@ from parser import dimport,checkplace
 from userbase import createuser,login,dopoln
 from captcha.image import ImageCaptcha
 import random
+import smtplib
+import auth
+
+
 app = Flask(__name__)
 app.config['SECRET_KEY']="5a38877f6f7b7bb3fcb2c8a55027241210df24b1"
 key=0
-url="http://192.168.1.33:5000"
+url="http://127.0.0.1:5000"
 
 
 @app.route("/")
 def index():
     return render_template('main.html')
+
+
 
 @app.route("/registration")
 def registration():
@@ -46,18 +52,31 @@ def submitresponse():
 
 @app.route("/submitreg", methods=['POST'])
 def submitreg():
-    username = request.form["username"]
-    password = request.form["password"]
-    name = request.form["name"]
-    captcha=request.form["captcha"]
-    if captcha==str(key):
-        resultofreg=createuser(name, username, password)
-        if resultofreg=="Логин занят":
-            return render_template('error.html',error="Логин занят")
+    try:
+        username = request.form["username"]
+        password = request.form["password"]
+        name = request.form["name"]
+        captcha=request.form["captcha"]
+        if captcha==str(key):
+            uscode1=random.randint(1000,9999)
+            vrcode=random.randint(10000,99999)
+            auth.createuser(uscode1,username,password,name,vrcode)
+            return render_template('verifyform.html',code=str(uscode1))
         else:
-            return f'<meta http-equiv="refresh" content="1; url={url}/login">'
-    else:
-        return render_template('error.html',error="Неверная капча, попробуйте еще раз")
+            return render_template('error.html',error="Неверная капча, попробуйте еще раз")
+    except:
+        try:
+            uscode=request.form["vscode"]
+            verifycode = request.form["verifcode"]
+            if verifycode==auth.takecode(uscode):
+                resultofreg = createuser(auth.takeuser(uscode)[1], auth.takeuser(uscode)[2], auth.takeuser(uscode)[0])
+                if resultofreg == "Логин занят":
+                    return render_template('error.html', error="Логин занят")
+                else:
+                    return f'<meta http-equiv="refresh" content="1; url={url}/login">'
+        except:
+            return render_template('error.html', error="Ничего не передано")
+
 
 
 
@@ -136,4 +155,4 @@ def submitadmin():
             return "error"
   except:
       return render_template('error.html')
-app.run(host='192.168.1.33')
+app.run()

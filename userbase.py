@@ -7,7 +7,8 @@ cursor.execute(''' CREATE TABLE IF NOT EXISTS Users (
 name TEXT NOT NULL,
 login TEXT NOT NULL,
 password TEXT NOT NULL,
-info TEXT NOT NULL
+info TEXT NOT NULL,
+tg TEXT NOT NULL
 )
 ''')
 connection.commit()
@@ -34,13 +35,13 @@ def checkexist(usname):
             return True
     return False
 
-def createuser(name,log,passw):
+def createuser(name,log,passw,tg):
     if checkexist(log)==True:
         return "Логин занят"
     else:
         cursor.execute(
-            'INSERT INTO Users (name, login, password, info) VALUES (?, ?, ?, ?)',
-            (name,log,passw,""))
+            'INSERT INTO Users (name, login, password, info ,tg) VALUES (?, ?, ?, ?, ?)',
+            (name,log,passw,"",tg))
         connection.commit()
 
 def dopoln(username,dopinfo):
@@ -63,3 +64,27 @@ def login(username,password):
     else:
         return False
 
+def only(tg):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[4] == tg:
+            return False
+    return True
+
+def change_password(tg,password):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[4] == tg:
+            cursor.execute(f'''UPDATE Users
+            SET password = ?
+            WHERE tg = ?;
+            ''',(password,tg))
+            connection.commit()

@@ -8,7 +8,8 @@ uscode TEXT NOT NULL,
 login TEXT NOT NULL,
 password TEXT NOT NULL,
 name TEXT NOT NULL,
-verifcode TEXT NOT NULL
+verifcode TEXT NOT NULL,
+tg TEXT NOT NULL
 )
 ''')
 connection.commit()
@@ -32,13 +33,26 @@ def takeuser(uscode):
     users = cursor.fetchall()
     for user in users:
         if user[0]==uscode:
-            return [user[1],user[2],user[3]]
+            return [user[1],user[2],user[3],user[5]]
     return False
 
 def createuser(uscode, name,log,passw,verifcode):
     cursor.execute(
-        'INSERT INTO auth (uscode, name, login, password, verifcode) VALUES (?, ?, ?, ?, ?)',
-        (uscode,name,log,passw,verifcode))
+        'INSERT INTO auth (uscode, name, login, password, verifcode, tg) VALUES (?, ?, ?, ?, ?, ?)',
+        (uscode,name,log,passw,verifcode,""))
     connection.commit()
 
 
+def dopoln(username,tg):
+    connection = sqlite3.connect('auth.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM auth')
+    users = cursor.fetchall()
+    for user in users:
+        if user[0] == username:
+            cursor.execute(f'''UPDATE auth
+            SET tg = ?
+            WHERE uscode = ?;
+            ''',(tg,username))
+            connection.commit()

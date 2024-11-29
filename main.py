@@ -69,7 +69,7 @@ def submitreg():
             uscode=request.form["vscode"]
             verifycode = request.form["verifcode"]
             if verifycode==auth.takecode(uscode):
-                resultofreg = createuser(auth.takeuser(uscode)[1], auth.takeuser(uscode)[2], auth.takeuser(uscode)[0])
+                resultofreg = createuser(auth.takeuser(uscode)[1], auth.takeuser(uscode)[2], auth.takeuser(uscode)[0], auth.takeuser(uscode)[3])
                 if resultofreg == "Логин занят":
                     return render_template('error.html', error="Логин занят")
                 else:
@@ -84,6 +84,11 @@ def submitreg():
 def loginmain():
     return render_template('login.html')
 
+
+@app.route("/logout", methods=['POST'])
+def logout():
+    session.pop('usname')
+    return f'<meta http-equiv="refresh" content="1; url={url}">'
 
 
 @app.route("/submitlogin", methods=['POST'])

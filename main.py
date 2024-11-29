@@ -136,7 +136,7 @@ def places(parameters):
 @app.route('/submit', methods=['POST'])
 def submitrest():
   try:
-      userlist = [request.form['town'],request.form['count'],request.form['atmosphere'],request.form['price'],request.form['side']]
+      userlist = [request.form['town'],request.form['count'],request.form['atmosphere'],request.form['price'],request.form['color'],request.form.get('type')]
       s=""
       for i in range(len(userlist)):
           if i!=len(userlist)-1:
@@ -148,11 +148,14 @@ def submitrest():
   except:
       return render_template('error.html',error="Неверные параметры")
 
+
+
+
 @app.route('/submitadmin', methods=['POST'])
 def submitadmin():
   try:
         if request.form["password"]=="adminworld23":
-            userlist = [request.form['name'],request.form['type'],request.form['town'],request.form['check'],request.form['info'],int(request.form['atmosphere']),int(request.form['price']),int(request.form['cousine']),int(request.form['side']),int(request.form['advert'])]
+            userlist = [request.form['name'],request.form['type'],request.form['town'],request.form['check'],request.form['info'],int(request.form['atmosphere']),int(request.form['price']),int(request.form['quality']),int(request.form['color']),int(request.form['esthetic']),int(request.form['submark']),int(request.form['advert'])]
             dimport(userlist)
 
             return f'OK'

@@ -10,17 +10,19 @@ cheque TEXT NOT NULL,
 info TEXT NOT NULL,
 atmosphere INTEGER,
 price INTEGER,
-cuisine INTEGER,
-side INTEGER,
+quality INTEGER,
+color INTEGER,
+esthetic INTEGER,
+submark INTEGER,
 advert INTEGER
 )
 ''')
 connection.commit()
 
-def dwrite(name1, type1, town1,cheque1,info1,atmosphere1,price1,cuisine1,side1,advert1):
+def dwrite(name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1):
     cursor.execute(
-        'INSERT INTO Places (name, type, town,cheque,info,atmosphere,price,cuisine,side,advert) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        (name1, type1, town1,cheque1,info1,atmosphere1,price1,cuisine1,side1,advert1))
+        'INSERT INTO Places (name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        (name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1))
     connection.commit()
 
 
@@ -35,8 +37,10 @@ def dread():
     info TEXT NOT NULL,
     atmosphere INTEGER,
     price INTEGER,
-    cuisine INTEGER,
-    side INTEGER,
+    quality INTEGER,
+    color INTEGER,
+    esthetic INTEGER,
+    submark INTEGER,
     advert INTEGER
     )
     ''')
@@ -64,9 +68,11 @@ def dimport(l):
     info=l[4]
     atmosphere=l[5]
     price=l[6]
-    cuisine=l[7]
-    inoutside=l[8]
-    advert=l[9]
-    dwrite(name, type, town,cheque,info,atmosphere,price,cuisine,inoutside,advert)
+    quality=l[7]
+    color=l[8]
+    esthetic=l[9]
+    submark=l[10]
+    advert=l[11]
+    dwrite(name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert)
 
 dread()

@@ -39,6 +39,7 @@ def createuser(name,log,passw,tg):
     if checkexist(log)==True:
         return "Логин занят"
     else:
+        #print(f'INSERT INTO Users (name, login, password, info ,tg) VALUES ({name}, {log}, {passw}, "", {tg})')
         cursor.execute(
             'INSERT INTO Users (name, login, password, info ,tg) VALUES (?, ?, ?, ?, ?)',
             (name,log,passw,"",tg))

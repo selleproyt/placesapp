@@ -163,4 +163,13 @@ def submitadmin():
             return "error"
   except:
       return render_template('error.html')
+
+
+@app.route('/submitnetwork',methods=['POST'])
+def submitnetwork():
+    try:
+        return render_template("results.html",results=place(parameters)[0],resscore=place(parameters)[1],dlp=len(place(parameters)[0]))
+    except:
+        return render_template('error.html',error="Неверный формат")
+
 app.run()

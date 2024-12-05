@@ -6,6 +6,8 @@ from flask import render_template
 from parser import dimport,checkplace
 from userbase import createuser,login,dopoln
 from captcha.image import ImageCaptcha
+from net import obrabotka
+from userbase import infotake
 import random
 import smtplib
 import auth
@@ -115,7 +117,7 @@ def user():
     try:
         username = session.get('usname')
         if username is not None:
-            return render_template('lk.html',name=username)
+            return render_template('lk.html',name=username, info=infotake(username))
         else:
             return f'<meta http-equiv="refresh" content="1; url={url}/login">'
     except:
@@ -165,11 +167,15 @@ def submitadmin():
       return render_template('error.html')
 
 
-@app.route('/submitnetwork',methods=['POST'])
-def submitnetwork():
+@app.route('/submitfromlk/<parameters>',methods=['POST'])
+def submitnetwork(parameters):
     try:
-        return render_template("results.html",results=place(parameters)[0],resscore=place(parameters)[1],dlp=len(place(parameters)[0]))
+        return render_template("results.html",results=obrabotka(parameters)[0],resscore=obrabotka(parameters)[1],dlp=len(obrabotka(parameters)[0]))
     except:
         return render_template('error.html',error="Неверный формат")
+
+@app.route('/submitfromlk/',methods=['POST'])
+def submitnetwork2():
+    return render_template('error.html',error="Вы еще не оценивали места")
 
 app.run()

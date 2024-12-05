@@ -9,7 +9,7 @@ def obrabotka(info):
     pred=list(map(str,info.split("0")))
     yl=[]
     ynaz=[]
-    for i in range(len(pred)):
+    for i in range(len(pred)-1):
         rate=pred[i][len(pred[i])-1]
         nazv=pred[i][0:-1]
         yl.append(int(rate))
@@ -33,6 +33,7 @@ def obrabotka(info):
         result=int(res[0][0].round())
         lplace.append((i2,result))
     lplace.sort(key= lambda x: x[1])
+    lplace.reverse()
     lzaved=[]
     lrates=[]
     for i in range(len(lplace)):

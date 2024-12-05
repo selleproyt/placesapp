@@ -35,11 +35,23 @@ def checkexist(usname):
             return True
     return False
 
+
+def infotake(name):
+    connection = sqlite3.connect('users.db', check_same_thread=False)
+    cursor = connection.cursor()
+    userlist = []
+    cursor.execute('SELECT * FROM Users')
+    users = cursor.fetchall()
+    for user in users:
+        if user[1] == name:
+            return user[3]
+    return False
+
 def createuser(name,log,passw,tg):
     if checkexist(log)==True:
         return "Логин занят"
     else:
-        #print(f'INSERT INTO Users (name, login, password, info ,tg) VALUES ({name}, {log}, {passw}, "", {tg})')
+        print(f'INSERT INTO Users (name, login, password, info ,tg) VALUES ({name}, {log}, {passw}, "", {tg})')
         cursor.execute(
             'INSERT INTO Users (name, login, password, info ,tg) VALUES (?, ?, ?, ?, ?)',
             (name,log,passw,"",tg))

@@ -8,6 +8,7 @@ from userbase import createuser,login,dopoln
 from captcha.image import ImageCaptcha
 from net import obrabotka
 from userbase import infotake
+from score import score
 import random
 import smtplib
 import auth
@@ -117,6 +118,8 @@ def user():
     try:
         username = session.get('usname')
         if username is not None:
+            #sc=score(infotake(username))
+
             return render_template('lk.html',name=username, info=infotake(username))
         else:
             return f'<meta http-equiv="refresh" content="1; url={url}/login">'
@@ -140,13 +143,17 @@ def submitrest():
   try:
       userlist = [request.form['town'],request.form['count'],request.form['atmosphere'],request.form['price'],request.form['color'],request.form.get('type')]
       s=""
-      for i in range(len(userlist)):
-          if i!=len(userlist)-1:
-              s+=userlist[i]
-              s+="&"
-          else:
-              s+=userlist[i]
-      return f'<meta http-equiv="refresh" content="1; url={url}/places/{s}">'
+      cnt=int(request.form['count'])
+      if cnt<1 or cnt>20:
+          return render_template('error.html', error="Неверный диапазон")
+      else:
+          for i in range(len(userlist)):
+              if i!=len(userlist)-1:
+                  s+=userlist[i]
+                  s+="&"
+              else:
+                  s+=userlist[i]
+          return f'<meta http-equiv="refresh" content="1; url={url}/places/{s}">'
   except:
       return render_template('error.html',error="Неверные параметры")
 
@@ -155,16 +162,21 @@ def submitrest():
 
 @app.route('/submitadmin', methods=['POST'])
 def submitadmin():
-  try:
+    try:
         if request.form["password"]=="adminworld23":
-            userlist = [request.form['name'],request.form['type'],request.form['town'],request.form['check'],request.form['info'],int(request.form['atmosphere']),int(request.form['price']),int(request.form['quality']),int(request.form['color']),int(request.form['esthetic']),int(request.form['submark']),int(request.form['advert'])]
+            userlist = [request.form['name'],request.form['type'],request.form['town'],request.form['check'],request.form['info'],int(request.form['atmosphere']),int(request.form['price']),int(request.form['quality']),int(request.form['color']),int(request.form['esthetic']),int(request.form['submark']),int(request.form['advert']),request.form['typeplace']]
             dimport(userlist)
+            file=request.files['image']
+            if file:
+                    # os.mkdir("img/uploads/"+str(file.filename))
+                filename = "static/img/places/" + (file.filename)
+                file.save(filename)
 
             return f'OK'
         else:
             return "error"
-  except:
-      return render_template('error.html')
+    except:
+        return render_template('error.html')
 
 
 @app.route('/submitfromlk/<parameters>',methods=['POST'])

@@ -14,20 +14,21 @@ quality INTEGER,
 color INTEGER,
 esthetic INTEGER,
 submark INTEGER,
-advert INTEGER
+advert INTEGER,
+typeplace TEXT NOT NULL
 )
 ''')
 connection.commit()
 
-def dwrite(name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1):
+def dwrite(name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1,typeplace1):
     cursor.execute(
-        'INSERT INTO Places (name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        (name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1))
+        'INSERT INTO Places (name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert,typeplace) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, &)',
+        (name1, type1, town1,cheque1,info1,atmosphere1,price1,quality1,color1,esthetic1,submark1,advert1,typeplace1))
     connection.commit()
 
 
 def dread():
-    connection = sqlite3.connect('places.db')
+    connection = sqlite3.connect('places.db', check_same_thread=False)
     cursor = connection.cursor()
     cursor.execute(''' CREATE TABLE IF NOT EXISTS Places (
     name TEXT NOT NULL,
@@ -41,7 +42,8 @@ def dread():
     color INTEGER,
     esthetic INTEGER,
     submark INTEGER,
-    advert INTEGER
+    advert INTEGER,
+    typeplace TEXT NOT NULL
     )
     ''')
     connection.commit()
@@ -73,6 +75,15 @@ def dimport(l):
     esthetic=l[9]
     submark=l[10]
     advert=l[11]
-    dwrite(name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert)
+    typeplace=l[12]
+    dwrite(name, type, town,cheque,info,atmosphere,price,quality,color,esthetic,submark,advert,typeplace)
+
+def taketwo(name):
+    placeslist = dread()
+    fl = 0
+    for i in range(len(placeslist)):
+        if placeslist[i][0] == name:
+            return [placeslist[i][10],placeslist[i][12],placeslist[i][1]]
+    return []
 
 dread()

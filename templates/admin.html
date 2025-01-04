@@ -5,15 +5,15 @@
     <title>Admin</title>
 </head>
 <body>
-<form method="post" action="/submitadmin">
-    <label>Password</label>
+<form method="post" action="/submitadmin" enctype="multipart/form-data">
+    <label>Докажи что админ</label>
     <input type="text" name="password">
     <br>
-    <label>name</label>
+    <label>Название</label>
     <input type="text" name="name">
     <br>
 
-    <label>type</label>
+    <label>Тип строго как в main</label>
     <input type="text" name="type">
     <br>
 
@@ -21,15 +21,15 @@
     <input type="text" name="town">
     <br>
 
-    <label>check</label>
+    <label>n.png номер картинки</label>
     <input type="text" name="check">
     <br>
 
-    <label>info</label>
+    <label>Про заведение</label>
     <input type="text" name="info">
     <br>
     <br>
-    <label>Что вы предпочтёте:</label>
+    <label>Место:</label>
     <br>
     <input type="radio" name="atmosphere" id="21" value="1">
     <label for="21">Веселье, вечеринки</label><br>
@@ -37,7 +37,7 @@
     <label for="20">Тихое и спокойное место</label><br>
     <br>
 
-    <label>Что вы предпочтёте:</label>
+    <label>Место:</label>
     <br>
     <input type="radio" name="price" id="31" value="1">
     <label for="31">Дорогое</label><br>
@@ -48,12 +48,12 @@
     <label>качество:</label>
     <br>
     <input type="radio" name="quality" id="51" value="1">
-    <label for="51">1</label><br>
+    <label for="51">Хорошее и выше</label><br>
     <input type="radio" name="quality" id="50" value="0">
-    <label for="50">0</label><br>
+    <label for="50">Среднее и ниже</label><br>
     <br>
 
-    <label>color:  </label>
+    <label>Цвета?</label>
     <br>
     <input type="radio" name="color" id="1" value="1">
     <label for="1">Мягкие</label><br>
@@ -61,24 +61,28 @@
     <label for="0">Темные</label><br>
 
 
-    <label>esthetic:</label>
+    <label>Заведение эстетично?:</label>
     <br>
     <input type="radio" name="esthetic" id="71" value="0">
-    <label for="61">0</label><br>
+    <label for="61">Нет</label><br>
     <input type="radio" name="esthetic" id="70" value="1">
-    <label for="60">1</label><br>
+    <label for="60">Да</label><br>
     <br>
-    <label>submark(1-10)</label>
+    <label>Ваша оценка заведения от 1 до 10</label>
     <input type="text" name="submark">
     <br>
-    <label>Advert:</label>
+    <label>Реклама:</label>
     <br>
     <input type="radio" name="advert" id="61" value="0">
-    <label for="61">0</label><br>
+    <label for="61">Нету</label><br>
     <input type="radio" name="advert" id="60" value="2">
-    <label for="60">2</label><br>
+    <label for="60">Есть</label><br>
     <br>
-
+    <br>
+    <label>Тип кухни или вид музея(из списка)</label>
+    <input type="text" name="submark">
+    <br>
+    <input type="file" id="image" name="image">
     <input type="submit">
 </form>
 </body>

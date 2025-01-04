@@ -38,5 +38,5 @@ def obrabotka(info):
     lrates=[]
     for i in range(len(lplace)):
         lzaved.append(userlist[lplace[i][0]])
-        lrates.append(lplace[i][1])
+        lrates.append(lplace[i][1]*10+1)
     return ((lzaved,lrates))

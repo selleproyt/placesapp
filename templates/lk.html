@@ -24,15 +24,21 @@
     <hr size="2px" width="100%" color="#8c13af">
     <br>
     <form class="formbutton" method="post" action="/submitfromlk/{{info}}">
-        <select class="selector">
+        <select name="town" class="selector">
             <option value="Пермь">Пермь</option>
             <option value="Екатеринбург">Екатеринбург</option>
+        </select>
+        <select name="type" class="selector">
+            <option value="Ресторан">Рестораны</option>
+            <option value="Культурное место">Культурные места</option>
+            <option value="Развлечения">Развлечения</option>
         </select>
         <br>
         <input value="Подобрать места по предпочтениям"  align="center" class="sendbutton" type="submit">
     </form>
     <br>
     <hr size="2px" width="100%" color="#8c13af">
+    <p>{{params}}</p>
 
     <section class="paform">
         <label class="prioritet">Оставьте отзыв для анализа нейросетью Ваших предпочтений:</label>

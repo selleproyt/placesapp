@@ -3,7 +3,8 @@ def score(info):
     pred = list(map(str, info.split("0")))
     yl = []
     ynaz = []
-    for i in range(len(pred) - 1):
+    pred.pop(len(pred) - 1)
+    for i in range(len(pred)):
         rate = pred[i][len(pred[i]) - 1]
         nazv = pred[i][0:-1]
         yl.append(int(rate))
@@ -39,6 +40,8 @@ def score(info):
             l2[7]+=l[0]
     l3=[]
     for i in range(8):
-        l3.append(l1[i]/l2[i])
-    return l
-
+        if l2[i]==0:
+            l3.append(0/10)
+        else:
+            l3.append(round(l1[i]/l2[i]/10,2))
+    return l3

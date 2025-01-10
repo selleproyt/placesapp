@@ -118,9 +118,8 @@ def user():
     try:
         username = session.get('usname')
         if username is not None:
-            #sc=score(infotake(username))
-
-            return render_template('lk.html',name=username, info=infotake(username))
+            sc=score(infotake(username))
+            return render_template('lk.html',name=username, info=infotake(username),params=sc)
         else:
             return f'<meta http-equiv="refresh" content="1; url={url}/login">'
     except:
@@ -182,9 +181,11 @@ def submitadmin():
 @app.route('/submitfromlk/<parameters>',methods=['POST'])
 def submitnetwork(parameters):
     try:
-        return render_template("results.html",results=obrabotka(parameters)[0],resscore=obrabotka(parameters)[1],dlp=len(obrabotka(parameters)[0]))
+        town=request.form.get('town')
+        type=request.form.get('type')
+        return render_template("results.html",results=obrabotka(parameters,type,town)[0],resscore=obrabotka(parameters,type,town)[1],dlp=len(obrabotka(parameters,type,town)[0]))
     except:
-        return render_template('error.html',error="Неверный формат")
+        return render_template('error.html',error="Вы оценили недостаточно мест, или в базе нет мест по вашему запросу.")
 
 @app.route('/submitfromlk/',methods=['POST'])
 def submitnetwork2():

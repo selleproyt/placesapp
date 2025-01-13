@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/code.js"></script>
     <title>Личный кабинет</title>
 </head>
 <body>
@@ -38,8 +39,44 @@
     </form>
     <br>
     <hr size="2px" width="100%" color="#8c13af">
-    <p>{{params}}</p>
+    <br>
 
+
+    <div align="center" class="stat">
+        <div class="tab">
+          <button class="sendbutton5" id="res">Рестораны</button>
+          <button class="sendbutton5" id="cul">Развлечения</button>
+          <button class="sendbutton5" id="abo">О Place2</button>
+        </div>
+        <hr size="3px" align="center" width="100%" color="#8c13af">
+        <div id="rest" class="tabcontent">
+          <h3 class="namelk2">Статистика по рестораном из ваших оценок:</h3>
+          <p class="namelk2">Японская кухня: {{params[3]*100}}</p>
+          <p class="namelk2">Итальянская кухня: {{params[4]*100}}</p>
+          <p class="namelk2">Европейская кухня: {{params[5]*100}}</p>
+          <p class="namelk2">Азиатская кухня: {{params[6]*100}}</p>
+          <p class="namelk2">Иная кухня: {{params[7]*100}}</p>
+        </div>
+
+        <div id="culture" class="tabcontent2">
+          <h3 class="namelk2">Статистика по культурным местам из ваших оценок:</h3>
+          <p class="namelk2">Музеи: {{params[0]*100}}</p>
+          <p class="namelk2">Памятники: {{params[1]*100}}</p>
+          <p class="namelk2">Выставки: {{params[2]*100}}</p>
+        </div>
+
+        <div id="about" class="tabcontent2">
+          <h3 class="namelk2">Place2</h3>
+          <p class="namelk2">Place2 представляет собой инфраструктуру из проектов направленых на развитие туризма и развлечений. Управление аккаунтом возможно через ЛК и TG.</p>
+          <p class="namelk2">Проект создан командой 59К, деятельность которой направленна на поддержку малых населенных пунктов пермского края.</p>
+          <p class="namelk2">Контакты: @sklvart и @Kicel_007.</p>
+        </div>
+
+    </div>
+
+
+    <br>
+    <hr size="2px" width="100%" color="#8c13af">
     <section class="paform">
         <label class="prioritet">Оставьте отзыв для анализа нейросетью Ваших предпочтений:</label>
         <br><br>

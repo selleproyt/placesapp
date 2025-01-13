@@ -1,7 +1,7 @@
 import sqlite3
 from flask import session
 import werkzeug
-connection = sqlite3.connect('auth.db', check_same_thread=False)
+connection = sqlite3.connect('places.db', check_same_thread=False)
 cursor = connection.cursor()
 cursor.execute(''' CREATE TABLE IF NOT EXISTS auth (
 uscode TEXT NOT NULL,
@@ -15,7 +15,7 @@ tg TEXT NOT NULL
 connection.commit()
 
 def takecode(uscode):
-    connection = sqlite3.connect('auth.db', check_same_thread=False)
+    connection = sqlite3.connect('places.db', check_same_thread=False)
     cursor = connection.cursor()
     userlist = []
     cursor.execute('SELECT * FROM auth')
@@ -26,7 +26,7 @@ def takecode(uscode):
     return "Неверный код"
 
 def takeuser(uscode):
-    connection = sqlite3.connect('auth.db', check_same_thread=False)
+    connection = sqlite3.connect('places.db', check_same_thread=False)
     cursor = connection.cursor()
     userlist = []
     cursor.execute('SELECT * FROM auth')
@@ -44,7 +44,7 @@ def createuser(uscode, name,log,passw,verifcode):
 
 
 def dopoln(username,tg):
-    connection = sqlite3.connect('auth.db', check_same_thread=False)
+    connection = sqlite3.connect('places.db', check_same_thread=False)
     cursor = connection.cursor()
     userlist = []
     cursor.execute('SELECT * FROM auth')

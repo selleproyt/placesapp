@@ -1,16 +1,30 @@
 body{
     display:grid;
 }
+.cent{
+    text-align: center;
+}
+.stat{
+    width: 70%;
+    height: 300px;
+    margin-left:15%;
+    border-radius: 40px;
+    background-color: #dc93f2;
+    border: 3px solid #8c13af;
+    font-family: sans-serif;
+
+}
 .paform{
     background-color: rgba(201,82,235, 0.2); /* Белый с прозрачностью */
     padding: 20px;
     border-radius: 10px;
-
+    font-family: sans-serif;
     text-align: center;
 }
 .headbanner{
     color:white;
     margin-right:20px;
+    font-family: sans-serif;
 }
 .sendbutton{
   background-color: #8c13af;
@@ -23,6 +37,7 @@ body{
   width:70%;
   border-radius: 30px;
   font-size:20px;
+  font-family: sans-serif;
 }
 .sendbutton2{
   background-color: #ed0e0e;
@@ -35,6 +50,19 @@ body{
   width:70%;
   border-radius: 30px;
   font-size:20px;
+  font-family: sans-serif;
+}
+.sendbutton5{
+  background-color: #8c13af;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 30px;
+  font-size:10px;
+  font-family: sans-serif;
 }
 .inputtown{
     background-color: #dc93f2;
@@ -43,6 +71,7 @@ body{
     border-color:#8c13af;
     height:40px;
     border: 40;
+    font-family: sans-serif;
 }
 .radiobox{
     background-color: #dc93f2;
@@ -53,21 +82,25 @@ body{
     height:40px;
     border: 40;
     padding-top:10px;
+    font-family: sans-serif;
 }
 
 .bord{
     background-color: white;
     width: 2px;
     height:40px;
+    font-family: sans-serif;
 }
 
 .inputtown::placeholder{
     color:#8c13af;
     font-size:20px;
+    font-family: sans-serif;
 }
 .prioritet{
     font-size:30px;
     color:#8c13af;
+    font-family: sans-serif;
 }
 .radiosize{
     transform:scale(2);
@@ -75,25 +108,30 @@ body{
     margin-left:15px;
     margin-right:15px;
     accent-color:#8c13af;
+    font-family: sans-serif;
 }
 .checkboxes{
     font-size: 20px;
     font-color: #8c13af;
+    font-family: sans-serif;
 }
 .linklk{
     padding-right:50px;
     padding-top:25px;
+    font-family: sans-serif;
 }
 .bottom{
     padding-top:0px;
     width:100%;
     height:200px;
     background-color:#8c13af;
+    font-family: sans-serif;
 }
 .bottomtext{
     padding-top:70px;
     color: white;
     font-size:20px;
+    font-family: sans-serif;
 
 }
 .resultbox{
@@ -104,26 +142,50 @@ body{
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     border-radius: 50px;
+    font-family: sans-serif;
 }
 .nameplace{
     color:white;
     margin-left:10px;
+    font-family: sans-serif;
 }
 .textplace{
     color:white;
     margin-left:40px;
+    font-family: sans-serif;
 }
 .namelk{
     font-size:100px;
     color:#8c13af;
+    font-family: sans-serif;
 }
 hr{
     color:#8c13af;
 }
 .formbutton{
     text-align:center;
+    font-family: sans-serif;
 }
 .selector{
     color:#8c13af;
     font-size:20px;
+    font-family: sans-serif;
+    width:20%;
+    text-align:center;
+}
+.tabcontent2{
+    display:none;
+}
+.namelk2{
+    color:#4e0074;
+    font-family: sans-serif;
+}
+.sel{
+    display:none;
+    width:20%;
+    color:#8c13af;
+    font-size:20px;
+    font-family: sans-serif;
+    text-align:center;
+    margin-left:40%
 }

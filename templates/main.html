@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/main.js"></script>
     <title>Place2Day</title>
 </head>
 <body>
@@ -16,12 +17,28 @@
         <br><br>
         <input placeholder="  Количество мест от 1 до 20" class="inputtown" type="text" name="count">
         <br><br>
-        <select name="type" class="selector">
+        <select id="type" name="type" class="selector">
+            <option value="-">-</option>
             <option value="Ресторан">Рестораны</option>
             <option value="Культурное место">Культурные места</option>
             <option value="Развлечения">Развлечения</option>
         </select>
-        <br>
+        <br><br>
+        <select id="hd1" class="sel" name="type2">
+            <option value="Японская кухня">Японская кухня</option>
+            <option value="Итальянская кухня">Итальянская кухня</option>
+            <option value="Европейская кухня">Европейская кухня</option>
+            <option value="Азиатская кухня">Азиатская кухня</option>
+            <option value="Иная кухня">Иная кухня</option>
+        </select>
+        <select id="hd2" class="sel" name="type2">
+            <option value="Музей">Музей</option>
+            <option value="Пямятник">Пямятник</option>
+            <option value="Выставка">Выставка</option>
+        </select>
+        <select id="hd3" class="sel" name="type2">
+            <option value="-">-</option>
+        </select>
         <br>
         <label class="prioritet">Что вы предпочтёте:</label>
         <br>

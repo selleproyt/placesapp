@@ -25,6 +25,7 @@ body{
     color:white;
     margin-right:20px;
     font-family: sans-serif;
+    vertical-align:top;
 }
 .sendbutton{
   background-color: #8c13af;
@@ -154,6 +155,11 @@ body{
     margin-left:40px;
     font-family: sans-serif;
 }
+.namelk3{
+    font-size:100px;
+    color:#dbe600;
+    font-family: sans-serif;
+}
 .namelk{
     font-size:100px;
     color:#8c13af;
@@ -188,4 +194,18 @@ hr{
     font-family: sans-serif;
     text-align:center;
     margin-left:40%
+}
+.premium{
+    text-align:center;
+}
+.prt{
+    font-size:20px;
+}
+.qq{
+    color:#8c13af;
+    text-align:center;
+    vertical-align:center;
+    margin-left: 14%;
+    margin-bottom:200px;
+    font-size: 20px;
 }

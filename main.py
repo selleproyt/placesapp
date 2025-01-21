@@ -3,7 +3,7 @@ from flask import redirect
 from poisk import place
 from flask import request, session, g
 from flask import render_template
-from parser import dimport, checkplace
+from parser import dimport, checkplace, dread
 from userbase import createuser, login, dopoln
 from captcha.image import ImageCaptcha
 from net import obrabotka
@@ -37,7 +37,7 @@ def registration():
 @app.route("/submitresponse", methods=['POST'])
 def submitresponse():
     try:
-        town = request.form["town"]
+        town = request.form.get("inputtown")
         mark = request.form["mark"]
         name = request.form["name"]
         if int(mark) < 10 and int(mark) > 0:
@@ -86,6 +86,9 @@ def submitreg():
 def loginmain():
     return render_template('login.html')
 
+@app.route("/premium")
+def premium():
+    return render_template('premium.html')
 
 @app.route("/logout", methods=['POST'])
 def logout():
@@ -110,6 +113,10 @@ def submitlogin():
 def admin():
     return render_template('admin.html')
 
+@app.route("/list")
+def list():
+    li=dread()
+    return render_template("list.html",li=li)
 
 @app.route("/user")
 def user():
@@ -129,6 +136,7 @@ def places(parameters):
     # return f"Привет, {parameters}!"
     try:
         parameters = list(map(str, parameters.split("&")))
+        # return f"Привет, {parameters}!"
         return render_template("results.html", results=place(parameters)[0], resscore=place(parameters)[1],
                                dlp=len(place(parameters)[0]))
     except:
@@ -138,8 +146,8 @@ def places(parameters):
 @app.route('/submit', methods=['POST'])
 def submitrest():
     try:
-        userlist = [request.form['town'], request.form['count'], request.form['atmosphere'], request.form['price'],
-                    request.form['color'], request.form.get('type')]
+        userlist = [request.form.get('inputtown'), request.form['count'], request.form['atmosphere'], request.form['price'],
+                    request.form['color'], request.form.get('type'),request.form.get('type2')]
         s = ""
         cnt = int(request.form['count'])
         if cnt < 1 or cnt > 20:

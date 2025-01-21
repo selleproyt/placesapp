@@ -80,8 +80,11 @@
     <section class="paform">
         <label class="prioritet">Оставьте отзыв для анализа нейросетью Ваших предпочтений:</label>
         <br><br>
-        <form method="post" action="/submitresponse">
-            <input placeholder="  Город" class="inputtown" type="text" name="town">
+            <form method="post" action="/submitresponse">
+            <select name="inputtown" class="selector">
+                <option value="Пермь">Пермь</option>
+                <option value="Екатеринбург">Екатеринбург</option>
+            </select>
             <br><br>
             <input placeholder="   Название места" class="inputtown" type="text" name="name">
             <br><br>

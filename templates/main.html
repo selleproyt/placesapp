@@ -9,11 +9,23 @@
 <body>
 <section class="headbanner">
     <img width="300px" src="/static/img/logo.jpg">
+    <q class="qq" align="center">Используй джойстик, чтобы управлять самолетом.</q>
     <a class="linklk" href="/user"> <img class="linklk" width="100px" align="right" src="/static/img/lk.jpg"></a>
+</section>
+<section class="premium">
+<hr size="2px" width="100%" color="#8c13af">
+<br>
+<a href="/premium"><input value="Place2Premium" class="sendbutton" type="submit" name="town"></a>
+<a href="/list"><input value="Список мест" class="sendbutton" type="submit" name="town"></a>
+<br><br>
+<hr size="2px" width="100%" color="#8c13af">
 </section>
 <section class="paform">
     <form method="post" action="/submit">
-        <input placeholder="  Город" class="inputtown" type="text" name="town">
+        <select name="inputtown" class="selector">
+            <option value="Пермь">Пермь</option>
+            <option value="Екатеринбург">Екатеринбург</option>
+        </select>
         <br><br>
         <input placeholder="  Количество мест от 1 до 20" class="inputtown" type="text" name="count">
         <br><br>

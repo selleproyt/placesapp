@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список заведений</title>
+</head>
+<body>
+<H1 align="center">Воспользуйтесь поиском чтобы найти заведение</H1>
+{% for elem in li:%}
+<p>{{elem[0]}}, {{elem[2]}}</p>
+{%endfor%}
+</body>
+</html>

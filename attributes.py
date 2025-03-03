@@ -1,3 +1,5 @@
+from random import choice
+from string import ascii_letters
 def nol(znach, mn):
     if znach == 0.0:
         return mn / 2
@@ -26,3 +28,7 @@ def getcount(zn, l):
         return nol(l[6], mn)
     if zn == "Иная кухня":
         return nol(l[7], mn)
+def createkey(username):
+    username+="0key"
+    username+=''.join(choice(ascii_letters) for i in range(12))
+    return username

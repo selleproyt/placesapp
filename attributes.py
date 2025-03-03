@@ -1,5 +1,6 @@
 from random import choice
 from string import ascii_letters
+import hashlib
 def nol(znach, mn):
     if znach == 0.0:
         return mn / 2
@@ -32,3 +33,8 @@ def createkey(username):
     username+="0key"
     username+=''.join(choice(ascii_letters) for i in range(12))
     return username
+def hash2(s):
+    hash_object = hashlib.sha256()
+    hash_object.update(s.encode())
+    hex_dig = hash_object.hexdigest()
+    return hex_dig

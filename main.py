@@ -9,6 +9,7 @@ from captcha.image import ImageCaptcha
 from net import obrabotka
 from userbase import infotake
 from score import score
+from attributes import hash2
 import random
 import smtplib
 import auth
@@ -63,7 +64,7 @@ def submitreg():
         if captcha == str(key):
             uscode1 = random.randint(1000, 9999)
             vrcode = random.randint(10000, 99999)
-            auth.createuser(uscode1, username, password, name, vrcode)
+            auth.createuser(uscode1, username, hash2(password), name, vrcode)
             return render_template('verifyform.html', code=str(uscode1))
         else:
             return render_template('error.html', error="Неверная капча, попробуйте еще раз")
@@ -135,7 +136,8 @@ def user():
 def places(parameters):
     # return f"Привет, {parameters}!"
     try:
-        parameters = list(map(str, parameters.split("&")))
+        parameters = str(parameters)
+        parameters = parameters.split('&')
         # return f"Привет, {parameters}!"
         return render_template("results.html", results=place(parameters)[0], resscore=place(parameters)[1],
                                dlp=len(place(parameters)[0]))

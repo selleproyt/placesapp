@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Flask
 from flask import redirect
 from poisk import place
@@ -11,6 +12,7 @@ from userbase import infotake, takebytoken
 from score import score
 import random
 import smtplib
+from attributes import hash2
 import auth
 
 
@@ -21,11 +23,38 @@ url = "http://127.0.0.1:5000"
 
 
 
+@app.route('/submitregapi/<parameters>')
+def submitregapi(parameters):
+    try:
+        parameters = str(parameters)
+        parameters = parameters.split('&')
+        username = parameters[0]
+        password = parameters[1]
+        name = parameters[2]
+        uscode1 = random.randint(1000, 9999)
+        vrcode = random.randint(10000, 99999)
+        auth.createuser(uscode1, username, hash2(password), name, vrcode)
+        return str(uscode1)
+    except:
+        try:
+            parameters = str(parameters)
+            parameters = parameters.split('&')
+            uscode = parameters[0]
+            verifycode = parameters[1]
+            if verifycode == auth.takecode(uscode):
+                resultofreg = createuser(auth.takeuser(uscode)[1], auth.takeuser(uscode)[2], auth.takeuser(uscode)[0],
+                                         auth.takeuser(uscode)[3])
+                if resultofreg == "Логин занят":
+                    return "BUSY LOGIN"
+                else:
+                    return "OK"
+        except:
+            return "NONE"
 
 
 
 @app.route('/submitresponseapi/<parameters>')
-def submitresponse(parameters):
+def submitresponseapi(parameters):
     try:
         parameters = str(parameters)
         parameters = parameters.split('&')
@@ -48,7 +77,7 @@ def submitresponse(parameters):
 
 
 @app.route("/submitloginapi/<parameters>")
-def submitlogin(parameters):
+def submitloginapi(parameters):
     try:
         parameters=str(parameters)
         parameters = parameters.split('&')
@@ -63,7 +92,7 @@ def submitlogin(parameters):
 
 
 @app.route("/listapi/<parameters>")
-def list(parameters):
+def listapi(parameters):
     try:
         log = takebytoken(parameters)
         if log!="-":
@@ -72,9 +101,8 @@ def list(parameters):
         return "-"
 
 @app.route("/userapi/<parameters>")
-def user(parameters):
+def userapi(parameters):
     try:
-        parameters = list(map(str, parameters.split("&")))
         username = takebytoken(parameters)
         if username != "-":
             sc = score(infotake(username))
@@ -82,80 +110,41 @@ def user(parameters):
         else:
             return '-'
     except:
+        return '-+'
+
+
+@app.route("/placesapi/<parameters>")
+def placesapi(parameters):
+    # return f"Привет, {parameters}!"
+    try:
+        parameters = str(parameters)
+        parameters = parameters.split('&')
+        # return f"Привет, {parameters}!"
+        return [place(parameters)[0], place(parameters)[1],len(place(parameters)[0])]
+    except:
         return '-'
 
 
-@app.route("/places/<parameters>")
-def places(parameters):
-    # return f"Привет, {parameters}!"
+
+
+
+
+@app.route('/submitfromlkapi/<parameters>')
+def submitnetworkapi(parameters):
     try:
-        parameters = list(map(str, parameters.split("&")))
-        # return f"Привет, {parameters}!"
-        return render_template("results.html", results=place(parameters)[0], resscore=place(parameters)[1],
-                               dlp=len(place(parameters)[0]))
+        parameters = str(parameters)
+        parameters = parameters.split('&')
+        town = parameters[0]
+        type = parameters[1]
+        parameters=parameters[2]
+        return [obrabotka(parameters, type, town)[0],obrabotka(parameters, type, town)[1]]
     except:
-        return render_template('error.html', error="Неверный формат")
+        return "NOT MUCH PLACES"
 
 
-@app.route('/submit', methods=['POST'])
-def submitrest():
-    try:
-        userlist = [request.form.get('inputtown'), request.form['count'], request.form['atmosphere'], request.form['price'],
-                    request.form['color'], request.form.get('type'),request.form.get('type2')]
-        s = ""
-        cnt = int(request.form['count'])
-        if cnt < 1 or cnt > 20:
-            return render_template('error.html', error="Неверный диапазон")
-        else:
-            for i in range(len(userlist)):
-                if i != len(userlist) - 1:
-                    s += userlist[i]
-                    s += "&"
-                else:
-                    s += userlist[i]
-            return f'<meta http-equiv="refresh" content="1; url={url}/places/{s}">'
-    except:
-        return render_template('error.html', error="Неверные параметры")
-
-
-@app.route('/submitadmin', methods=['POST'])
-def submitadmin():
-    try:
-        if request.form["password"] == "adminworld23":
-            userlist = [request.form['name'], request.form['type'], request.form['town'], request.form['check'],
-                        request.form['info'], int(request.form['atmosphere']), int(request.form['price']),
-                        int(request.form['quality']), int(request.form['color']), int(request.form['esthetic']),
-                        int(request.form['submark']), int(request.form['advert']), request.form['typeplace']]
-            dimport(userlist)
-            file = request.files['image']
-            if file:
-                # os.mkdir("img/uploads/"+str(file.filename))
-                filename = "static/img/places/" + (file.filename)
-                file.save(filename)
-
-            return f'OK'
-        else:
-            return "error"
-    except:
-        return render_template('error.html')
-
-
-@app.route('/submitfromlk/<parameters>', methods=['POST'])
-def submitnetwork(parameters):
-    try:
-        town = request.form.get('town')
-        type = request.form.get('type')
-        return render_template("results.html", results=obrabotka(parameters, type, town)[0],
-                               resscore=obrabotka(parameters, type, town)[1],
-                               dlp=len(obrabotka(parameters, type, town)[0]))
-    except:
-        return render_template('error.html',
-                               error="Вы оценили недостаточно мест, или в базе нет мест по вашему запросу.")
-
-
-@app.route('/submitfromlk/', methods=['POST'])
-def submitnetwork2():
-    return render_template('error.html', error="Вы еще не оценивали места")
+@app.route('/submitfromlkapi/')
+def submitnetwork2api():
+    return "NOT SUCH PLACES"
 
 
 app.run()

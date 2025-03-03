@@ -2,7 +2,7 @@ import sqlite3
 from flask import session
 import werkzeug
 from attributes import createkey
-
+from attributes import hash2
 connection = sqlite3.connect('places.db', check_same_thread=False)
 cursor = connection.cursor()
 cursor.execute(''' CREATE TABLE IF NOT EXISTS Users (
@@ -35,7 +35,7 @@ def takeuser(log, passw):
     cursor.execute('SELECT * FROM Users')
     users = cursor.fetchall()
     for user in users:
-        if user[1] == log and passw == user[2]:
+        if user[1] == log and hash2(passw) == user[2]:
             return True
     return False
 
@@ -46,7 +46,7 @@ def takeuserapi(log, passw):
     cursor.execute('SELECT * FROM Users')
     users = cursor.fetchall()
     for user in users:
-        if user[1] == log and passw == user[2]:
+        if user[1] == log and hash2(passw) == user[2]:
             return user[5]
     return "-"
 
@@ -107,7 +107,8 @@ def login(username, password):
         return True
     else:
         return False
-
+def loginapi(username, password):
+    return takeuser(username, password)
 
 def only(tg):
     connection = sqlite3.connect('places.db', check_same_thread=False)
